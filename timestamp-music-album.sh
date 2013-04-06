@@ -105,19 +105,20 @@ main() {
 		local timestamp
 
 		if ! [ -e "$timestamp_file" ] ; then
-			stdout "No timestamp found, storing it: $album"
+			stdout "No Timestamp.txt found, storing it: $album"
 
 			timestamp="$(get_oldest_audio_file_timestamp "$album")"
 			stdout "$timestamp_file_header$timestamp" > "$timestamp_file"
 		else
-			stdout "Restoring timestamp for: $album"
 			timestamp="$(<"$timestamp_file")"
 			if [[ "$timestamp" != "$timestamp_file_header"* ]] ; then
 				die "$timestamp_file is in invalid format!"
 			fi
 			timestamp="${timestamp#$timestamp_file_header}"
-			set_file_atime_from_stat "$album" "$timestamp"
 		fi
+
+		stdout "Setting atime to Timestamp.txt value for: $album"
+		set_file_atime_from_stat "$album" "$timestamp"
 	done
 }
 
