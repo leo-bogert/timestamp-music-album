@@ -6,6 +6,7 @@ fi
 
 # We use globs to search for various audio file types, not all might exist so we need failing globs to work.
 shopt -u failglob
+shopt -s globstar
 
 make_stat_timestamp_comparable() {
 	if [ "$#" -ne 1 ] ; then
