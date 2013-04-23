@@ -72,6 +72,7 @@ get_oldest_audio_file_timestamp() {
 	files=( "$1"/**/*.[fF][lL][aA][cC] )
 	files+=( "$1"/**/*.[mM][pP]3 )
 	files+=( "$1"/**/*.[mM]4[aA] )
+	files+=( "$1"/**/*.[aA][pP][eE] )
 
 	if (( ${#files[@]} == 0 )) ; then
 		die "No audio files found in: $1"
